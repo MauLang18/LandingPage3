@@ -5,11 +5,11 @@ import { FaTiktok } from "react-icons/fa";
 import useFetchIdAndUpdateSignalR from "../hooks/useFetchIdAndUpdateSignalR";
 
 const SocialLinks = ({ textColor, textSize }) => {
-  const INSTAGRAM = useFetchIdAndUpdateSignalR(5) || {};
-  const FACEBOOK = useFetchIdAndUpdateSignalR(6) || {};
-  const YOUTUBE = useFetchIdAndUpdateSignalR(7) || {};
-  const LINKEDIN = useFetchIdAndUpdateSignalR(8) || {};
-  const TIKTOK = useFetchIdAndUpdateSignalR(9) || {};
+  const INSTAGRAM = useFetchIdAndUpdateSignalR(23) || {};
+  const FACEBOOK = useFetchIdAndUpdateSignalR(24) || {};
+  const YOUTUBE = useFetchIdAndUpdateSignalR(25) || {};
+  const LINKEDIN = useFetchIdAndUpdateSignalR(26) || {};
+  const TIKTOK = useFetchIdAndUpdateSignalR(27) || {};
 
   const extractValue = (data) => {
     if (data && data.data && data.data.valor) {

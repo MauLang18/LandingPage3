@@ -5,8 +5,8 @@ const Logo = ({ width, height, linkUrl }) => {
     <div className="w-full mx-auto">
       <img
         className={`${width} ${height}`}
-        src="tranqui_logo_blanco.png"
-        alt="Logo Tranqui Express"
+        src="motornova_logo_blanco.png"
+        alt="Logo MotorNova"
       />
     </div>
   );

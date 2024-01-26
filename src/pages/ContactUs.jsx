@@ -59,9 +59,9 @@ const ContactForm = () => {
     return { __html: term };
   };
 
-  const CORREO_ELECTRONICO = useFetchIdAndUpdateSignalR(1) || {};
-  const NUMERO_TELEFONO = useFetchIdAndUpdateSignalR(2) || {};
-  const NUMERO_WHATSAPP = useFetchIdAndUpdateSignalR(3) || {};
+  const CORREO_ELECTRONICO = useFetchIdAndUpdateSignalR(19) || {};
+  const NUMERO_TELEFONO = useFetchIdAndUpdateSignalR(20) || {};
+  const NUMERO_WHATSAPP = useFetchIdAndUpdateSignalR(22) || {};
 
   const extractValue = (data) => {
     if (data && data.data && data.data.valor) {

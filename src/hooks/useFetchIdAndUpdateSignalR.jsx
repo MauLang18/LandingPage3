@@ -20,7 +20,7 @@ const useFetchIdAndUpdateSignalR = (id) => {
     fetchData();
 
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://apiadmin.tranquiexpress.com:8443/hub1", {
+      .withUrl("https://apiadmin.tranquiexpress.com:8443/hub", {
         withCredentials: true,
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets,

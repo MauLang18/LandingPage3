@@ -3,9 +3,9 @@ import SectionData from "../components/SectionData";
 import useFetchIdAndUpdateSignalR from "../hooks/useFetchIdAndUpdateSignalR";
 
 const Nosotros = () => {
-  const MISION = useFetchIdAndUpdateSignalR(16) || {};
-  const VISION = useFetchIdAndUpdateSignalR(17) || {};
-  const VALORES = useFetchIdAndUpdateSignalR(18) || {};
+  const MISION = useFetchIdAndUpdateSignalR(28) || {};
+  const VISION = useFetchIdAndUpdateSignalR(29) || {};
+  const VALORES = useFetchIdAndUpdateSignalR(30) || {};
 
   const extractValue = (data) => {
     if (data && data.data && data.data.valor) {

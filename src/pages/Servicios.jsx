@@ -1,11 +1,11 @@
 import "./style.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
 import AlternateImageText from "../components/AlternateImageText";
 import { useFetch } from "../hooks/useFetch";
 
 const Servicios = () => {
-  const { data, loading, error, setData } = useFetch(
+  const { data } = useFetch(
     `https://apiadmin.tranquiexpress.com:8443/ServicioBeneficio`
   );
 
@@ -18,7 +18,7 @@ const Servicios = () => {
   }, [data]);
 
   useEffect(() => {
-    const connection1 = new signalR.HubConnectionBuilder()
+    const connection = new signalR.HubConnectionBuilder()
       .withUrl("https://apiadmin.tranquiexpress.com:8443/hub1", {
         withCredentials: true,
         skipNegotiation: true,
@@ -26,21 +26,7 @@ const Servicios = () => {
       })
       .build();
 
-    const connection2 = new signalR.HubConnectionBuilder()
-      .withUrl("https://apiadmin.tranquiexpress.com:8443/hub2", {
-        withCredentials: true,
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets,
-      })
-      .build();
-
-    /*const connection = new signalR.HubConnectionBuilder()
-        .withUrl("https://apiadmin.tranquiexpress.com/hub", {
-          withCredentials: true,
-        })
-        .build();*/
-
-    connection1.on("ServicioBeneficioRegistrado", (banner) => {
+    connection.on("ServicioBeneficioRegistrado", (banner) => {
       setSignalRData((prevData) => {
         if (!prevData || !prevData.data || !prevData.data.items) {
           return { data: { items: [banner] } };
@@ -60,7 +46,7 @@ const Servicios = () => {
       });
     });
 
-    connection1.on("ServicioBeneficioActualizado", (banner) => {
+    connection.on("ServicioBeneficioActualizado", (banner) => {
       setSignalRData((prevData) => {
         if (!prevData || !prevData.data) {
           return { data: { items: [] } };
@@ -82,29 +68,7 @@ const Servicios = () => {
       });
     });
 
-    connection2.on("ServicioBeneficioActualizado2", (banner) => {
-      setSignalRData((prevData) => {
-        if (!prevData || !prevData.data) {
-          return { data: { items: [] } };
-        }
-
-        const updatedItems = prevData.data.items.map((item) =>
-          item.id === banner.id ? banner : item
-        );
-
-        const updatedData = {
-          ...prevData,
-          data: {
-            ...prevData.data,
-            items: updatedItems,
-          },
-        };
-
-        return updatedData;
-      });
-    });
-
-    connection1.on("ServicioBeneficioEliminado", (id) => {
+    connection.on("ServicioBeneficioEliminado", (id) => {
       setSignalRData((prevData) => {
         if (!prevData || !prevData.data) {
           return { data: { items: [] } };
@@ -127,25 +91,17 @@ const Servicios = () => {
 
     const startConnections = async () => {
       try {
-        await connection1.start();
+        await connection.start();
         console.log("Conexión 1 establecida con éxito");
       } catch (error) {
         console.error("Error al iniciar la conexión 1:", error);
-      }
-
-      try {
-        await connection2.start();
-        console.log("Conexión 2 establecida con éxito");
-      } catch (error) {
-        console.error("Error al iniciar la conexión 2:", error);
       }
     };
 
     startConnections();
 
     return () => {
-      connection1.stop();
-      connection2.stop();
+      connection.stop();
     };
   }, []);
 
@@ -164,7 +120,7 @@ const Servicios = () => {
               signalRData.data &&
               signalRData.data.items &&
               signalRData.data.items
-                .filter((item) => item.estado === 1)
+                .filter((item) => item.estado === 1 && item.empresaId === 3)
                 .map((item, index) => (
                   <AlternateImageText
                     key={item.id}
