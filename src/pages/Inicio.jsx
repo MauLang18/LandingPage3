@@ -7,7 +7,7 @@ const Inicio = () => {
   const isMobile = window.innerWidth <= 768;
 
   const { data } = useFetch(
-    `https://apiadmin.tranquiexpress.com:8443/BannerPrincipal`
+    `https://apiadmin.tranquiexpress.com:8443/BannerPrincipal?empresa=2`
   );
 
   const [signalRData, setSignalRData] = useState(null);

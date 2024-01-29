@@ -6,7 +6,7 @@ import { useFetch } from "../hooks/useFetch";
 
 const Servicios = () => {
   const { data } = useFetch(
-    `https://apiadmin.tranquiexpress.com:8443/ServicioBeneficio`
+    `https://apiadmin.tranquiexpress.com:8443/ServicioBeneficio?empresa=2`
   );
 
   const [signalRData, setSignalRData] = useState(null);
