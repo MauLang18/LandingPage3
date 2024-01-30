@@ -10,8 +10,8 @@ const Nosotros = () => {
   const extractValue = (data) => {
     if (data && data.data && data.data.valor) {
       return data.data.valor;
-    } else if (data && data.valor) {
-      return data.valor;
+    } else if (data && data.Valor) {
+      return data.Valor;
     } else {
       return "";
     }

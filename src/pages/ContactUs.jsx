@@ -61,13 +61,13 @@ const ContactForm = () => {
 
   const CORREO_ELECTRONICO = useFetchIdAndUpdateSignalR(19) || {};
   const NUMERO_TELEFONO = useFetchIdAndUpdateSignalR(20) || {};
-  const NUMERO_WHATSAPP = useFetchIdAndUpdateSignalR(22) || {};
+  const NUMERO_WHATSAPP = useFetchIdAndUpdateSignalR(21) || {};
 
   const extractValue = (data) => {
     if (data && data.data && data.data.valor) {
       return data.data.valor;
-    } else if (data && data.valor) {
-      return data.valor;
+    } else if (data && data.Valor) {
+      return data.Valor;
     } else {
       return "";
     }

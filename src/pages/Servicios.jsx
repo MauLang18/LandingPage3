@@ -6,7 +6,7 @@ import { useFetch } from "../hooks/useFetch";
 
 const Servicios = () => {
   const { data } = useFetch(
-    `https://apiadmin.tranquiexpress.com:8443/ServicioBeneficio?empresa=2`
+    `https://apiadmin.tranquiexpress.com:8443/ServicioBeneficio?empresa=3`
   );
 
   const [signalRData, setSignalRData] = useState(null);
@@ -19,82 +19,76 @@ const Servicios = () => {
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://apiadmin.tranquiexpress.com:8443/hub1", {
+      .withUrl("https://apiadmin.tranquiexpress.com:8443/hub", {
         withCredentials: true,
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets,
       })
       .build();
 
-    connection.on("ServicioBeneficioRegistrado", (banner) => {
-      setSignalRData((prevData) => {
-        if (!prevData || !prevData.data || !prevData.data.items) {
-          return { data: { items: [banner] } };
+      connection.on("PublishCore", (servicioBeneficio) => {
+        // Convierte la cadena JSON en un objeto
+        const item = JSON.parse(servicioBeneficio);
+      
+        const isEmpresaIdValid = item && item.EmpresaId === 3;
+        const isDirigidoValid =
+          item &&
+            (item.Dirigido === "servicioBeneficioRegistrado" ||
+            item.Dirigido === "servicioBeneficioActualizado" ||
+            item.Dirigido === "servicioBeneficioEliminado");
+      
+        if (isEmpresaIdValid && isDirigidoValid) {
+          setSignalRData((prevData) => {
+            if (!prevData || !prevData.data || !prevData.data.items) {
+              return { data: { items: [item] } };
+            }
+      
+            if (item.Dirigido === "servicioBeneficioRegistrado") {
+              const updatedItems = [...prevData.data.items, item];
+              const updatedData = {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  items: updatedItems,
+                },
+              };
+              return updatedData;
+            } else if (item.Dirigido === "servicioBeneficioActualizado") {
+              const updatedItems = prevData.data.items.map((prevItem) =>
+                prevItem.id === item.Id ? item : prevItem
+              );
+              const updatedData = {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  items: updatedItems,
+                },
+              };
+              return updatedData;
+            } else if (item.Dirigido === "servicioBeneficioEliminado") {
+              const filteredItems = prevData.data.items.filter(
+                (prevItem) => prevItem.id !== item.Id
+              );
+              const updatedData = {
+                ...prevData,
+                data: {
+                  items: filteredItems,
+                },
+              };
+              return updatedData;
+            }
+          });
         }
-
-        const updatedItems = [...prevData.data.items, banner];
-
-        const updatedData = {
-          ...prevData,
-          data: {
-            ...prevData.data,
-            items: updatedItems,
-          },
-        };
-
-        return updatedData;
-      });
-    });
-
-    connection.on("ServicioBeneficioActualizado", (banner) => {
-      setSignalRData((prevData) => {
-        if (!prevData || !prevData.data) {
-          return { data: { items: [] } };
-        }
-
-        const updatedItems = prevData.data.items.map((item) =>
-          item.id === banner.id ? banner : item
-        );
-
-        const updatedData = {
-          ...prevData,
-          data: {
-            ...prevData.data,
-            items: updatedItems,
-          },
-        };
-
-        return updatedData;
-      });
-    });
-
-    connection.on("ServicioBeneficioEliminado", (id) => {
-      setSignalRData((prevData) => {
-        if (!prevData || !prevData.data) {
-          return { data: { items: [] } };
-        }
-
-        const filteredItems = prevData.data.items.filter(
-          (item) => item.id !== id
-        );
-
-        const updatedData = {
-          ...prevData,
-          data: {
-            items: filteredItems,
-          },
-        };
-
-        return updatedData;
-      });
-    });
+      });            
 
     const startConnections = async () => {
       try {
-        await connection.start();
-        console.log("Conexión 1 establecida con éxito");
+        if (connection.state !== signalR.HubConnectionState.Connected) {
+          await connection.start();
+          console.log("Conexión establecida con éxito");
+        }
       } catch (error) {
-        console.error("Error al iniciar la conexión 1:", error);
+        console.error("Error al iniciar la conexión:", error);
       }
     };
 
