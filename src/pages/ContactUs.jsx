@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
-import Bitrix24Form from "../components/Bitrix24Form";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "../hooks/useForm2";
 import { useModal } from "../hooks/useModal";
 import Modal from "../components/Modal";
@@ -53,6 +53,7 @@ const ContactForm = () => {
     ) : null;
   };
 
+  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [isOpenModal, openModal, closeModal] = useModal(false);
 
   const renderTermContent = (term) => {
@@ -71,6 +72,10 @@ const ContactForm = () => {
     } else {
       return "";
     }
+  };
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaTokens(token);
   };
 
   return (
@@ -209,6 +214,12 @@ const ContactForm = () => {
                 ></textarea>
                 {getErrorForField("message")}
               </div>
+            </div>
+            <div className="flex mt-8">
+              <ReCAPTCHA
+                sitekey="6LfZg0oqAAAAAMbUbspcCIyyYCfnG9l2DxklapTK"
+                onChange={handleRecaptchaChange}
+              />
             </div>
             <button
               type="submit"

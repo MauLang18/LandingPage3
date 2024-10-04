@@ -48,7 +48,7 @@ const Footer = () => {
           />
         </div>
         <div className="w-1/3 mx-4 mb-24">
-          <TermsAndConditions
+          {/* <TermsAndConditions
             textColor="white"
             textSize="xl"
             title={"Política"}
@@ -61,6 +61,22 @@ const Footer = () => {
               {
                 label: "Política de Privacidad",
                 text: "Información Personal del cliente En caso de que Tranqui Express requiera información personal del cliente, cuando este pida un servicio de envío, la empresa solicitará información privada del usuario: nombre, correo electrónico, número de tarjeta de crédito u otra información, con el fin de brindarle el servicio que requiera. Cambios en la Política de Privacidad de Tranqui Express En caso de que existieran cambios a nuestra política de privacidad, Tranqui Express, publicará los cambios por este medio, para que usted siempre esté enterado. Obligaciones del Usuario Él usuario debe garantizar que todos los artículos o documentación a enviar estarán explicados de forma completa en los formularios digitales del sitio web de Tranqui Express, con el fin de asegurar una entrega exitoso al destinatario. Responsabilidades que no asumen Tranqui Express No seremos responsables de tus actos u omisiones: •	La declaración incorrecta de la carga •	Errores o deficiencias en el embalaje, en la protección, en el marcado o en la dirección del envío. •	Omisiones del destinatario o de cualquier otra persona interesada en el envío. •	No seremos responsables si tú o el destinatario violan cualquiera de los términos de nuestro acuerdo. •	Por pérdidas, daños, retrasos, entregas incompletas, entregas equivocadas, falta de entrega, información errónea u omisión de suministro de información en relación con envíos de dinero en efectivo, divisas o cualquier otro artículo prohibido.",
+              },
+            ]}
+          /> */}
+          <TermsAndConditions
+            textColor="white"
+            textSize="xl"
+            title={"Política"}
+            isModal={true}
+            terms={[
+              {
+                label: "Términos y Condiciones",
+                text: "",
+              },
+              {
+                label: "Política de Privacidad",
+                text: "",
               },
             ]}
           />
@@ -99,7 +115,7 @@ const Footer = () => {
               },
             ]}
           />
-          <TermsAndConditions
+          {/* <TermsAndConditions
             textColor="white"
             textSize="xl"
             title={"Política"}
@@ -112,6 +128,22 @@ const Footer = () => {
               {
                 label: "Política de Privacidad",
                 text: "Información Personal del cliente En caso de que Tranqui Express requiera información personal del cliente, cuando este pida un servicio de envío, la empresa solicitará información privada del usuario: nombre, correo electrónico, número de tarjeta de crédito u otra información, con el fin de brindarle el servicio que requiera. Cambios en la Política de Privacidad de Tranqui Express En caso de que existieran cambios a nuestra política de privacidad, Tranqui Express, publicará los cambios por este medio, para que usted siempre esté enterado. Obligaciones del Usuario Él usuario debe garantizar que todos los artículos o documentación a enviar estarán explicados de forma completa en los formularios digitales del sitio web de Tranqui Express, con el fin de asegurar una entrega exitoso al destinatario. Responsabilidades que no asumen Tranqui Express No seremos responsables de tus actos u omisiones: •	La declaración incorrecta de la carga •	Errores o deficiencias en el embalaje, en la protección, en el marcado o en la dirección del envío. •	Omisiones del destinatario o de cualquier otra persona interesada en el envío. •	No seremos responsables si tú o el destinatario violan cualquiera de los términos de nuestro acuerdo. •	Por pérdidas, daños, retrasos, entregas incompletas, entregas equivocadas, falta de entrega, información errónea u omisión de suministro de información en relación con envíos de dinero en efectivo, divisas o cualquier otro artículo prohibido.",
+              },
+            ]}
+          /> */}
+          <TermsAndConditions
+            textColor="white"
+            textSize="xl"
+            title={"Política"}
+            isModal={true}
+            terms={[
+              {
+                label: "Términos y Condiciones",
+                text: "",
+              },
+              {
+                label: "Política de Privacidad",
+                text: "",
               },
             ]}
           />
