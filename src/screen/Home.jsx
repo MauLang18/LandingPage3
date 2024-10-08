@@ -20,7 +20,7 @@ function Home() {
       <ContactUs />
       {/* <Descarga /> */}
       <Bitrix24Button />
-      <WhatsAppButton />
+      {/* <WhatsAppButton /> */}
       <Footer />
     </>
   );
