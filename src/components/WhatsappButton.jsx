@@ -45,7 +45,7 @@ const WhatsAppButton = () => {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 transition-transform transform hover:scale-105 ${
+      className={`fixed bottom-12 right-12 transition-transform transform hover:scale-105 ${
         isDragging ? "z-50" : "z-10"
       }`}
     >
@@ -58,7 +58,7 @@ const WhatsAppButton = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <RiWhatsappFill className="text-white text-4xl" />
+          <RiWhatsappFill className="text-white text-3xl" />
         </a>
       </div>
     </div>
